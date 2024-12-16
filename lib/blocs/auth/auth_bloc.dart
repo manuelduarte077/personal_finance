@@ -18,19 +18,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthLoginRequested>((event, emit) async {
       emit(state.copyWith(isSubmitting: true, errorMessage: null));
       try {
-        await authRepository.signInWithEmailAndPassword(state.email, state.password);
+        await authRepository.signInWithEmailAndPassword(
+            state.email, state.password);
         emit(state.copyWith(isSubmitting: false, isAuthenticated: true));
       } catch (e) {
         emit(state.copyWith(isSubmitting: false, errorMessage: e.toString()));
       }
     });
 
-    on<AuthLogouRequested>((event, emit) async {
+    on<AuthLogoutRequested>((event, emit) async {
       try {
         await authRepository.signOut();
         emit(state.copyWith(isAuthenticated: false));
       } catch (e) {
-        emit(state.copyWith(isAuthenticated: false, errorMessage: e.toString()));
+        emit(
+            state.copyWith(isAuthenticated: false, errorMessage: e.toString()));
       }
     });
   }

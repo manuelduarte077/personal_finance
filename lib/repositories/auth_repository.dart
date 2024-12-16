@@ -18,6 +18,19 @@ class AuthRepository {
     }
   }
 
+  // Create a new user with email and password
+  Future<User?> signUpWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      throw e.message ?? 'Error';
+    }
+  }
+
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }

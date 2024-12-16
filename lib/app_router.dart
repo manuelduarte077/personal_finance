@@ -1,20 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:personal_finance/screens/dashboard_screen.dart';
 import 'package:personal_finance/screens/login_screen.dart';
 import 'package:personal_finance/screens/profile_screen.dart';
+import 'package:personal_finance/screens/register_screen.dart';
 import 'package:personal_finance/screens/spending_screen.dart';
 import 'package:personal_finance/screens/wallet_screen.dart';
 import 'package:personal_finance/widgets/nav_bar.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/dashboard',
+    initialLocation: '/login',
     routes: [
       GoRoute(
         path: '/login',
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/register',
+        builder: (context, state) => const RegisterScreen(),
       ),
       ShellRoute(
         builder: (context, state, child) {

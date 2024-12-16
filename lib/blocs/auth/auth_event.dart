@@ -14,4 +14,6 @@ class AuthPasswordChanged extends AuthEvent {
 
 class AuthLoginRequested extends AuthEvent {}
 
-class AuthLogouRequested extends AuthEvent {}
+class AuthSignUpRequested extends AuthEvent {}
+
+class AuthLogoutRequested extends AuthEvent {}
