@@ -1,8 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import '../../data/repositories/auth_repository.dart';
 
-import 'auth_event.dart';
-import 'auth_state.dart';
+part 'auth_event.dart';
+part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
