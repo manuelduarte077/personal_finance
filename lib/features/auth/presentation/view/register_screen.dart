@@ -35,10 +35,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
   File? profilePicture;
 
-  Future<void> pickProfilePicture() async {
-    final pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
+  Future<void> pickProfilePicture(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
 
     if (pickedFile != null) {
       setState(() {
@@ -86,7 +84,49 @@ class _RegisterFormState extends State<RegisterForm> {
                   children: [
                     Center(
                       child: GestureDetector(
-                        onTap: pickProfilePicture,
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            showDragHandle: true,
+                            builder: (context) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 16,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Select a profile picture',
+                                      style: textTheme.titleMedium,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: const Icon(Icons.camera_alt),
+                                      title: const Text('Camera'),
+                                      onTap: () {
+                                        pickProfilePicture(ImageSource.camera);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: const Icon(Icons.photo),
+                                      title: const Text('Gallery'),
+                                      onTap: () {
+                                        pickProfilePicture(ImageSource.gallery);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                         child: CircleAvatar(
                           radius: 60,
                           backgroundColor: profilePicture != null
