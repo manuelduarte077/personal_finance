@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:404077597399:android:d200b41f47e9be9049d692",
+        "mobilesdk_app_id": "1:404077597399:android:9c9a8298a57ecd6349d692",
         "android_client_info": {
-          "package_name": "com.example.personal_finance"
+          "package_name": "dev.donmanuel.app.personal_finance"
         }
       },
       "oauth_client": [],
