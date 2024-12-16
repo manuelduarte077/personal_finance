@@ -1,5 +1,5 @@
 import '../../data/models/user_model.dart';
-import '../../data/repositories/auth_repository.dart';
+import '../repositories/auth_repository.dart';
 
 class SignUpUseCase {
   final AuthRepository _authRepository;
