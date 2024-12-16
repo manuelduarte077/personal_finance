@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthBloc>();
-    final user = authBloc.authRepository.getCurrentUser();
+    final user = authBloc.getCurrentUserUseCase();
 
     return Scaffold(
       appBar: AppBar(

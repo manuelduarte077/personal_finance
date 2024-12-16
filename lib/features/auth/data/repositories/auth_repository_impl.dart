@@ -85,9 +85,20 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  /// Cerar sesión
   @override
   Future<void> signOut() async {
     await firebaseAuth.signOut();
+  }
+
+  /// Restablecer la contraseña
+  @override
+  Future<void> resetPassword(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw _handleAuthError(e);
+    }
   }
 
   /// Obtener el usuario actual
