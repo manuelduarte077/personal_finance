@@ -185,11 +185,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     PasswordField(
                       passwordController: passwordController,
                     ),
-                    const SizedBox(height: 8),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Forgot Password?'),
-                    ),
                     const SizedBox(height: 16),
                     Center(
                       child: SizedBox(
@@ -203,7 +198,13 @@ class _RegisterFormState extends State<RegisterForm> {
                                   profilePicture?.path ?? '',
                                 ));
                           },
-                          child: const Text('Sign Up'),
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
                       ),
                     ),

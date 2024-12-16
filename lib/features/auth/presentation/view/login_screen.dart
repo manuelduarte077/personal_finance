@@ -120,7 +120,9 @@ class _LoginColumnState extends State<LoginColumn> {
                         ),
                         SizedBox(height: 8 * spaceFactor),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.push('/reset-password');
+                          },
                           child: const Text('Forgot Password?'),
                         ),
                         SizedBox(height: 16 * spaceFactor),
