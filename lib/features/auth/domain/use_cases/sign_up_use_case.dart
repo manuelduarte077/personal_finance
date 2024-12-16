@@ -6,7 +6,8 @@ class SignUpUseCase {
 
   SignUpUseCase(this._authRepository);
 
-  Future<UserModel> call(String email, String password) async {
-    return await _authRepository.signUp(email, password);
+  Future<UserModel> call(
+      String name, String email, String password, String profilePic) async {
+    return await _authRepository.signUp(name, email, password, profilePic);
   }
 }
