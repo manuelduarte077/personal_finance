@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:personal_finance/blocs/auth/auth_bloc.dart';
-import 'package:personal_finance/blocs/auth/auth_state.dart';
+import 'package:personal_finance/features/auth/blocs/auth/auth_bloc.dart';
+import 'package:personal_finance/features/auth/blocs/auth/auth_state.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

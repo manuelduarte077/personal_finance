@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:personal_finance/blocs/auth/auth_bloc.dart';
-import 'package:personal_finance/blocs/auth/auth_event.dart';
+import 'package:personal_finance/features/auth/blocs/auth/auth_bloc.dart';
+import 'package:personal_finance/features/auth/blocs/auth/auth_event.dart';
 import 'package:personal_finance/widgets/profile_option.dart';
-import '../widgets/profile_card.dart';
+import '../../widgets/profile_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
