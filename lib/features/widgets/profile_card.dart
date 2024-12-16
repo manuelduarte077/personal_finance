@@ -18,9 +18,6 @@ class ProfileCard extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-      ),
       child: Row(
         children: [
           CircleAvatar(

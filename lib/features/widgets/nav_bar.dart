@@ -67,17 +67,14 @@ class NavBar extends StatelessWidget {
           left: MediaQuery.of(context).size.width / 2 - 30,
           child: FloatingActionButton(
             backgroundColor: theme.colorScheme.primary,
+            foregroundColor: Colors.white,
             onPressed: () {
               showModalBottomSheet(
                 context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                ),
+                showDragHandle: true,
                 builder: (context) {
-                  final TextEditingController amountController =
-                      TextEditingController();
-                  final TextEditingController descriptionController =
-                      TextEditingController();
+                  final amountController = TextEditingController();
+                  final descriptionController = TextEditingController();
 
                   return Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -90,20 +87,21 @@ class NavBar extends StatelessWidget {
                           decoration:
                               const InputDecoration(labelText: 'Amount'),
                         ),
+                        const SizedBox(height: 16),
                         TextField(
                           controller: descriptionController,
                           decoration: const InputDecoration(
                               labelText: 'Description (optional)'),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 20),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ElevatedButton(
+                            FilledButton(
                               onPressed: () {},
                               child: const Text('Add Income'),
                             ),
-                            ElevatedButton(
+                            FilledButton(
                               onPressed: () {},
                               child: const Text('Add Expense'),
                             ),
@@ -115,7 +113,10 @@ class NavBar extends StatelessWidget {
                 },
               );
             },
-            child: const Icon(Icons.add),
+            child: const Icon(
+              Icons.add,
+              size: 30,
+            ),
           ),
         ),
       ],

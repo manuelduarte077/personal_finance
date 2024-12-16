@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:personal_finance/app/app.dart';
 import 'package:personal_finance/firebase_options.dart';
 
+import 'core/di/dependency_injection.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  setup();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

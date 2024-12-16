@@ -1,8 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import '../../data/repositories/auth_repository.dart';
 
-import 'auth_event.dart';
-import 'auth_state.dart';
+part 'auth_event.dart';
+part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
@@ -23,7 +23,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpRequested>((event, emit) async {
       emit(AuthLoading());
       try {
-        await authRepository.signUp(event.email, event.password);
+        await authRepository.signUp(
+            event.email, event.password, event.name, event.profilePic);
         emit(AuthAuthenticated());
       } catch (e) {
         emit(AuthError(e.toString()));
