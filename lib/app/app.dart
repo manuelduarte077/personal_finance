@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:personal_finance/app_router.dart';
+import 'package:personal_finance/core/router/app_router.dart';
 import 'package:personal_finance/app_theme.dart';
 import 'package:personal_finance/features/auth/blocs/auth/auth_bloc.dart';
 import 'package:personal_finance/features/auth/repositories/auth_repository.dart';
