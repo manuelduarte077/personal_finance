@@ -24,10 +24,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
@@ -53,11 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA6II3AxsXmc9tf8F3ynhuqIPPIWOxtR-I',
-    appId: '1:789266984209:ios:b1b74f1c4c0889a3cef0b0',
-    messagingSenderId: '789266984209',
-    projectId: 'personal-finances-98969',
-    storageBucket: 'personal-finances-98969.firebasestorage.app',
-    iosBundleId: 'com.aliappfinance.personalFinance',
+    apiKey: 'AIzaSyBfV64bl-NZaMnUiwVTTxB6C7JRMiTEvbU',
+    appId: '1:404077597399:ios:38a236891859fae449d692',
+    messagingSenderId: '404077597399',
+    projectId: 'personalfinance-30e87',
+    storageBucket: 'personalfinance-30e87.firebasestorage.app',
+    iosBundleId: 'dev.donmanuel.app.personalFinance',
   );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyBNw0tuDOcMdh7GnY3nOb1K9Rdc6Lrn6Yo',
+    appId: '1:404077597399:android:9c9a8298a57ecd6349d692',
+    messagingSenderId: '404077597399',
+    projectId: 'personalfinance-30e87',
+    storageBucket: 'personalfinance-30e87.firebasestorage.app',
+  );
+
 }
