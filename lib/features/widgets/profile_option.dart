@@ -15,6 +15,7 @@ class ProfileOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      splashColor: Colors.transparent,
       leading: Icon(icon, color: Theme.of(context).primaryColor),
       title: Text(
         title,
