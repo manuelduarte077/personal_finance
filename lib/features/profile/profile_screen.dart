@@ -15,7 +15,13 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+          ),
+        ),
       ),
       body: FutureBuilder(
         future: user,
@@ -32,13 +38,14 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ProfileCard(
-                    name: 'John Doe',
+                    name: user.name.toString(),
                     email: user.email.toString(),
-                    avatarUrl: null,
+                    avatarUrl: user.profilePictureUrl,
                   ),
                   const SizedBox(height: 16),
                   Expanded(
                     child: ListView(
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         const ProfileOption(
                           icon: Icons.security,
