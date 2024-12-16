@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/user_model.dart';
-import 'auth_repository.dart';
+import '../../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth firebaseAuth;
@@ -85,9 +85,20 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  /// Cerar sesión
   @override
   Future<void> signOut() async {
     await firebaseAuth.signOut();
+  }
+
+  /// Restablecer la contraseña
+  @override
+  Future<void> resetPassword(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw _handleAuthError(e);
+    }
   }
 
   /// Obtener el usuario actual

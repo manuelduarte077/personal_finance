@@ -1,9 +1,8 @@
 class UserModel {
-  final String uid; // ID único del usuario (de Firebase Auth)
-  final String name; // Nombre del usuario
-  final String email; // Correo electrónico del usuario
-  final String?
-      profilePictureUrl; // URL de la foto de perfil del usuario (puede ser nula)
+  final String uid;
+  final String name;
+  final String email;
+  final String? profilePictureUrl;
 
   UserModel({
     required this.uid,
@@ -12,7 +11,6 @@ class UserModel {
     this.profilePictureUrl,
   });
 
-  /// Crear una instancia de `UserModel` desde un mapa (Firestore)
   factory UserModel.fromMap(Map<String, dynamic> data) {
     return UserModel(
       uid: data['uid'],
@@ -22,7 +20,6 @@ class UserModel {
     );
   }
 
-  /// Convertir una instancia de `UserModel` a un mapa (para Firestore)
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,

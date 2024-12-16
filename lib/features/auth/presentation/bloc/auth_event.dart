@@ -2,6 +2,8 @@ part of 'auth_bloc.dart';
 
 abstract class AuthEvent {}
 
+class GetCurrentUserRequested extends AuthEvent {}
+
 class SignInRequested extends AuthEvent {
   final String email;
   final String password;
@@ -16,6 +18,12 @@ class SignUpRequested extends AuthEvent {
   final String profilePic;
 
   SignUpRequested(this.email, this.password, this.name, this.profilePic);
+}
+
+class ResetPasswordRequested extends AuthEvent {
+  final String email;
+
+  ResetPasswordRequested(this.email);
 }
 
 class SignOutRequested extends AuthEvent {}

@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AuthBloc(authRepository: getIt()),
+          create: (context) => getIt<AuthBloc>(),
         ),
       ],
       child: ScreenUtilInit(

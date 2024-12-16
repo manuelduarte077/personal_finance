@@ -10,6 +10,8 @@ import 'package:personal_finance/screens/spending_screen.dart';
 import 'package:personal_finance/screens/wallet_screen.dart';
 import 'package:personal_finance/features/widgets/nav_bar.dart';
 
+import '../../features/auth/presentation/view/reset_password_view.dart';
+
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: '/login',
@@ -21,6 +23,10 @@ class AppRouter {
       GoRoute(
         path: '/register',
         builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: '/reset-password',
+        builder: (context, state) => ResetPasswordView(),
       ),
       ShellRoute(
         builder: (context, state, child) {
