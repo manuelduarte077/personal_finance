@@ -51,16 +51,16 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBfV64bl-NZaMnUiwVTTxB6C7JRMiTEvbU',
-    appId: '1:404077597399:ios:9131bae08251ba8f49d692',
+    appId: '1:404077597399:ios:38a236891859fae449d692',
     messagingSenderId: '404077597399',
     projectId: 'personalfinance-30e87',
     storageBucket: 'personalfinance-30e87.firebasestorage.app',
-    iosBundleId: 'com.aliappfinance.personalFinance',
+    iosBundleId: 'dev.donmanuel.app.personalFinance',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBNw0tuDOcMdh7GnY3nOb1K9Rdc6Lrn6Yo',
-    appId: '1:404077597399:android:d200b41f47e9be9049d692',
+    appId: '1:404077597399:android:9c9a8298a57ecd6349d692',
     messagingSenderId: '404077597399',
     projectId: 'personalfinance-30e87',
     storageBucket: 'personalfinance-30e87.firebasestorage.app',
