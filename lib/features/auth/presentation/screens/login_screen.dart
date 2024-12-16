@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:personal_finance/features/auth/blocs/auth/auth_bloc.dart';
 import 'package:personal_finance/features/auth/blocs/auth/auth_state.dart';
 
@@ -146,7 +147,9 @@ class PasswordField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: const InputDecoration(
-          labelText: 'Contrasena', prefixIcon: Icon(Icons.lock)),
+        labelText: 'Contrasena',
+        prefixIcon: Icon(Icons.lock),
+      ),
       obscureText: true,
       keyboardType: TextInputType.emailAddress,
       validator: Validator.validatePassword,

@@ -3,18 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:personal_finance/features/auth/blocs/auth/auth_bloc.dart';
 import 'package:personal_finance/features/auth/blocs/auth/auth_event.dart';
-import 'package:personal_finance/widgets/profile_option.dart';
-import '../../widgets/profile_card.dart';
+import 'package:personal_finance/features/widgets/profile_option.dart';
+import '../widgets/profile_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
-      backgroundColor: theme.appBarTheme.foregroundColor,
       appBar: AppBar(
         title: const Text('Profile'),
       ),

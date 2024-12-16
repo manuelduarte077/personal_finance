@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_finance/widgets/budget_card.dart';
+import 'package:personal_finance/features/widgets/budget_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -8,17 +8,18 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        navigationBar: const CupertinoNavigationBar(
-          middle: Text('Dashboard'),
-        ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 120,
-            ),
-            _buildBody(context),
-          ],
-        ));
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Dashboard'),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 120,
+          ),
+          _buildBody(context),
+        ],
+      ),
+    );
   }
 
   Widget _buildBody(BuildContext context) {
