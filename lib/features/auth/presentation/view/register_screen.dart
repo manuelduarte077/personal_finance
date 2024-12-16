@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:personal_finance/shared/const/app_images.dart';
-import 'package:personal_finance/shared/svg_asset_image.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../shared/email_field.dart';
+import '../../../../shared/name_field.dart';
 import '../../../../shared/password_field.dart';
 import '../bloc/auth_bloc.dart';
 
@@ -27,16 +29,28 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  File? profilePicture;
+
+  Future<void> pickProfilePicture() async {
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedFile != null) {
+      setState(() {
+        profilePicture = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool useTwoColumns = mediaSize.height < 500;
-    final double spaceFactor = useTwoColumns ? 0.5 : 1;
 
     return SafeArea(
       child: BlocListener<AuthBloc, AuthState>(
@@ -65,89 +79,96 @@ class _RegisterFormState extends State<RegisterForm> {
           child: ConstrainedBox(
             constraints: const BoxConstraints.tightFor(width: 600),
             child: Padding(
-              padding: EdgeInsets.all(24.0 * spaceFactor),
-              child: Row(
-                children: <Widget>[
-                  if (useTwoColumns) ...<Widget>[
-                    const SizedBox(height: 32),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints.tightFor(width: 300),
-                      child: SvgAssetImage(
-                        assetName: AppImages.verified,
-                        color: theme.colorScheme.primary,
+              padding: const EdgeInsets.all(24),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: GestureDetector(
+                        onTap: pickProfilePicture,
+                        child: CircleAvatar(
+                          radius: 60,
+                          backgroundColor: profilePicture != null
+                              ? Colors.transparent
+                              : theme.colorScheme.secondary,
+                          child: profilePicture != null
+                              ? ClipOval(
+                                  child: Image.file(
+                                    profilePicture!,
+                                    height: 120,
+                                    width: 120,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : Icon(
+                                  Icons.camera_alt,
+                                  color: theme.colorScheme.secondaryContainer,
+                                  size: 48,
+                                ),
+                        ),
                       ),
                     ),
-                  ] else
-                    const SizedBox.shrink(),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Spacer(flex: useTwoColumns ? 1 : 2),
+                    const SizedBox(height: 32),
+                    Text(
+                      'Create an Account',
+                      style: textTheme.headlineLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
                         Text(
-                          'Create an Account',
-                          style: textTheme.headlineLarge!
-                              .copyWith(fontWeight: FontWeight.bold),
+                          'You have an account?',
+                          style: textTheme.bodyLarge,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'You have an account?',
-                              style: textTheme.bodyLarge,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                context.pop();
-                              },
-                              child: const Text('Sign In'),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8 * spaceFactor),
-                        EmailField(
-                          emailController: emailController,
-                        ),
-                        SizedBox(height: 16 * spaceFactor),
-                        PasswordField(
-                          passwordController: passwordController,
-                        ),
-                        SizedBox(height: 8 * spaceFactor),
                         TextButton(
-                          onPressed: () {},
-                          child: const Text('Forgot Password?'),
+                          onPressed: () {
+                            context.pop();
+                          },
+                          child: const Text('Sign In'),
                         ),
-                        SizedBox(height: 16 * spaceFactor),
-                        Center(
-                          child: SizedBox(
-                            width: 200,
-                            child: FilledButton(
-                              onPressed: () {
-                                context.read<AuthBloc>().add(SignInRequested(
-                                      emailController.text,
-                                      passwordController.text,
-                                    ));
-                              },
-                              child: const Text('Sign Up'),
-                            ),
-                          ),
-                        ),
-                        if (!useTwoColumns) ...<Widget>[
-                          const Spacer(),
-                          Expanded(
-                            flex: 10,
-                            child: SvgAssetImage(
-                              assetName: AppImages.verified,
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                          const Spacer(),
-                        ] else
-                          const Spacer(),
                       ],
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    NameField(
+                      nameController: nameController,
+                      prefixIcon: Icons.person_outline,
+                      hintText: 'Enter your name',
+                      labelText: 'Name',
+                    ),
+                    const SizedBox(height: 16),
+                    EmailField(
+                      emailController: emailController,
+                    ),
+                    const SizedBox(height: 16),
+                    PasswordField(
+                      passwordController: passwordController,
+                    ),
+                    const SizedBox(height: 8),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Forgot Password?'),
+                    ),
+                    const SizedBox(height: 16),
+                    Center(
+                      child: SizedBox(
+                        width: 200,
+                        child: FilledButton(
+                          onPressed: () {
+                            context.read<AuthBloc>().add(SignUpRequested(
+                                  nameController.text,
+                                  emailController.text,
+                                  passwordController.text,
+                                  profilePicture?.path ?? '',
+                                ));
+                          },
+                          child: const Text('Sign Up'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
