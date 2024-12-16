@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_finance/features/auth/blocs/auth/auth_event.dart';
-import 'package:personal_finance/features/auth/blocs/auth/auth_state.dart';
+import 'package:personal_finance/features/auth/presentation/blocs/auth_event.dart';
+import 'package:personal_finance/features/auth/presentation/blocs/auth_state.dart';
 import 'package:personal_finance/features/auth/repositories/auth_repository.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

@@ -1,7 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../shared/const/app_images.dart';
 import '../../../../shared/svg_asset_image.dart';
@@ -21,31 +20,6 @@ class LoginScreen extends StatelessWidget {
 
 class LoginColumn extends StatelessWidget {
   const LoginColumn({super.key});
-
-  /// A custom Path to paint stars.
-  Path drawStar(Size size) {
-    // Function to convert degree to radians
-    double degToRad(double deg) => deg * (pi / 180.0);
-
-    const int numberOfPoints = 5;
-    final double halfWidth = size.width / 2;
-    final double externalRadius = halfWidth;
-    final double internalRadius = halfWidth / 2.5;
-    final double degreesPerStep = degToRad(360 / numberOfPoints);
-    final double halfDegreesPerStep = degreesPerStep / 2;
-    final Path path = Path();
-    final double fullAngle = degToRad(360);
-    path.moveTo(size.width, halfWidth);
-
-    for (double step = 0; step < fullAngle; step += degreesPerStep) {
-      path.lineTo(halfWidth + externalRadius * cos(step),
-          halfWidth + externalRadius * sin(step));
-      path.lineTo(halfWidth + internalRadius * cos(step + halfDegreesPerStep),
-          halfWidth + internalRadius * sin(step + halfDegreesPerStep));
-    }
-    path.close();
-    return path;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +68,9 @@ class LoginColumn extends StatelessWidget {
                             style: textTheme.bodyLarge,
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.push('/register');
+                            },
                             child: const Text('Make account'),
                           ),
                         ],

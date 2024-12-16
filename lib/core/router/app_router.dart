@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:personal_finance/screens/dashboard_screen.dart';
-import 'package:personal_finance/features/auth/presentation/screens/login_screen.dart';
+import 'package:personal_finance/features/auth/presentation/view/login_screen.dart';
 import 'package:personal_finance/features/profile/profile_screen.dart';
-import 'package:personal_finance/features/auth/presentation/screens/register_screen.dart';
+import 'package:personal_finance/features/auth/presentation/view/register_screen.dart';
 import 'package:personal_finance/screens/spending_screen.dart';
 import 'package:personal_finance/screens/wallet_screen.dart';
 import 'package:personal_finance/features/widgets/nav_bar.dart';
@@ -34,34 +34,39 @@ class AppRouter {
           return Scaffold(
             body: child,
             bottomNavigationBar: NavBar(
-                currentIndex: _getCurrentIndex(state.uri.toString()),
-                onTabSelected: (index) {
-                  switch (index) {
-                    case 0:
-                      context.go('/dashboard');
-                    case 1:
-                      context.go('/speding');
-                    case 2:
-                      context.go('/wallet');
-                    case 3:
-                      context.go('/profile');
-                  }
-                }),
+              currentIndex: _getCurrentIndex(state.uri.toString()),
+              onTabSelected: (index) {
+                switch (index) {
+                  case 0:
+                    context.go('/dashboard');
+                  case 1:
+                    context.go('/speding');
+                  case 2:
+                    context.go('/wallet');
+                  case 3:
+                    context.go('/profile');
+                }
+              },
+            ),
           );
         },
         routes: [
           GoRoute(
-              path: '/dashboard',
-              builder: (context, state) => const DashboardScreen()),
+            path: '/dashboard',
+            builder: (context, state) => const DashboardScreen(),
+          ),
           GoRoute(
-              path: '/speding',
-              builder: (context, state) => const SpendingScreen()),
+            path: '/speding',
+            builder: (context, state) => const SpendingScreen(),
+          ),
           GoRoute(
-              path: '/wallet',
-              builder: (context, state) => const WalletScreen()),
+            path: '/wallet',
+            builder: (context, state) => const WalletScreen(),
+          ),
           GoRoute(
-              path: '/profile',
-              builder: (context, state) => const ProfileScreen())
+            path: '/profile',
+            builder: (context, state) => const ProfileScreen(),
+          )
         ],
       )
     ],
