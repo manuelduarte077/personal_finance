@@ -35,10 +35,7 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Card(
-      color: theme.appBarTheme.foregroundColor,
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         leading: CircleAvatar(

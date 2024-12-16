@@ -8,7 +8,7 @@ import 'package:personal_finance/features/profile/profile_screen.dart';
 import 'package:personal_finance/features/auth/presentation/screens/register_screen.dart';
 import 'package:personal_finance/screens/spending_screen.dart';
 import 'package:personal_finance/screens/wallet_screen.dart';
-import 'package:personal_finance/widgets/nav_bar.dart';
+import 'package:personal_finance/features/widgets/nav_bar.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(

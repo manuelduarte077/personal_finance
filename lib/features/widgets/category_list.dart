@@ -11,7 +11,6 @@ class CategoryList extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (context, index) {
         return Card(
-          color: theme.primaryColorDark,
           margin: const EdgeInsets.symmetric(vertical: 8),
           child: ListTile(
             title: Text(

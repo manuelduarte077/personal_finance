@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import '../widgets/balance_card.dart';
-import '../widgets/transaction_list.dart';
+import '../features/widgets/balance_card.dart';
+import '../features/widgets/transaction_list.dart';
 
 class WalletScreen extends StatelessWidget {
   const WalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
-      backgroundColor: theme.appBarTheme.foregroundColor,
       appBar: AppBar(
         title: const Text('Wallet'),
       ),

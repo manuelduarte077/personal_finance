@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/app_theme.dart';
 
 class NavBar extends StatelessWidget {
   final int currentIndex;
@@ -13,6 +12,8 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -25,8 +26,9 @@ class NavBar extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: AppThemes.greenFinanceTheme.dividerColor,
-                blurRadius: 10,
+                color: theme.colorScheme.primary,
+                blurRadius: 6,
+                blurStyle: BlurStyle.outer,
               ),
             ],
           ),
@@ -34,7 +36,7 @@ class NavBar extends StatelessWidget {
             currentIndex: currentIndex,
             onTap: onTabSelected,
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: AppThemes.greenFinanceTheme.primaryColor,
+            selectedItemColor: theme.colorScheme.primary,
             unselectedItemColor: Colors.grey,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -64,7 +66,7 @@ class NavBar extends StatelessWidget {
           top: -30,
           left: MediaQuery.of(context).size.width / 2 - 30,
           child: FloatingActionButton(
-            backgroundColor: AppThemes.greenFinanceTheme.primaryColor,
+            backgroundColor: theme.colorScheme.primary,
             onPressed: () {
               showModalBottomSheet(
                 context: context,
