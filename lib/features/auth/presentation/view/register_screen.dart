@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:personal_finance/shared/const/app_images.dart';
 import 'package:personal_finance/shared/svg_asset_image.dart';
 
+import '../../../../shared/email_field.dart';
+import '../../../../shared/password_field.dart';
+
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
@@ -22,6 +25,9 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -75,21 +81,12 @@ class _RegisterFormState extends State<RegisterForm> {
                         ],
                       ),
                       SizedBox(height: 8 * spaceFactor),
-                      const TextField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.mail),
-                          labelText: 'Email',
-                          hintText: 'Enter your email address',
-                        ),
+                      EmailField(
+                        emailController: emailController,
                       ),
                       SizedBox(height: 16 * spaceFactor),
-                      const TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.key),
-                          labelText: 'Password',
-                          hintText: 'Minimum 8 chars',
-                        ),
+                      PasswordField(
+                        passwordController: passwordController,
                       ),
                       SizedBox(height: 8 * spaceFactor),
                       TextButton(

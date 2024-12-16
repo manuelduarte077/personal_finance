@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../shared/const/app_images.dart';
+import '../../../../shared/email_field.dart';
+import '../../../../shared/password_field.dart';
 import '../../../../shared/svg_asset_image.dart';
 
 const bool _debug = !kReleaseMode && false;
@@ -18,8 +20,16 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class LoginColumn extends StatelessWidget {
+class LoginColumn extends StatefulWidget {
   const LoginColumn({super.key});
+
+  @override
+  State<LoginColumn> createState() => _LoginColumnState();
+}
+
+class _LoginColumnState extends State<LoginColumn> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -76,21 +86,12 @@ class LoginColumn extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 8 * spaceFactor),
-                      const TextField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.mail),
-                          labelText: 'Email',
-                          hintText: 'Enter your email address',
-                        ),
+                      EmailField(
+                        emailController: emailController,
                       ),
                       SizedBox(height: 16 * spaceFactor),
-                      const TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.key),
-                          labelText: 'Password',
-                          hintText: 'Minimum 8 chars',
-                        ),
+                      PasswordField(
+                        passwordController: passwordController,
                       ),
                       SizedBox(height: 8 * spaceFactor),
                       TextButton(
