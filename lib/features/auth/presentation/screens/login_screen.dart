@@ -1,180 +1,156 @@
-import 'dart:async';
+import 'dart:math';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-import 'package:personal_finance/features/auth/blocs/auth/auth_bloc.dart';
-import 'package:personal_finance/features/auth/blocs/auth/auth_state.dart';
+import '../../../../shared/const/app_images.dart';
+import '../../../../shared/svg_asset_image.dart';
+
+const bool _debug = !kReleaseMode && false;
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Iniciar Sesion'),
-      ),
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state.isSubmitting) {
-            showDialog(
-              context: context,
-              builder: (cotext) => const Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (state.isAuthenticated) {
-            Navigator.of(context).pop();
-            context.go('/dashboard');
-          } else if (state.errorMessage != null) {
-            Navigator.of(context).pop();
+    return const Scaffold(
+      body: LoginColumn(),
+    );
+  }
+}
 
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.errorMessage!)));
-          }
-        },
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: LoginForm(),
+class LoginColumn extends StatelessWidget {
+  const LoginColumn({super.key});
+
+  /// A custom Path to paint stars.
+  Path drawStar(Size size) {
+    // Function to convert degree to radians
+    double degToRad(double deg) => deg * (pi / 180.0);
+
+    const int numberOfPoints = 5;
+    final double halfWidth = size.width / 2;
+    final double externalRadius = halfWidth;
+    final double internalRadius = halfWidth / 2.5;
+    final double degreesPerStep = degToRad(360 / numberOfPoints);
+    final double halfDegreesPerStep = degreesPerStep / 2;
+    final Path path = Path();
+    final double fullAngle = degToRad(360);
+    path.moveTo(size.width, halfWidth);
+
+    for (double step = 0; step < fullAngle; step += degreesPerStep) {
+      path.lineTo(halfWidth + externalRadius * cos(step),
+          halfWidth + externalRadius * sin(step));
+      path.lineTo(halfWidth + internalRadius * cos(step + halfDegreesPerStep),
+          halfWidth + internalRadius * sin(step + halfDegreesPerStep));
+    }
+    path.close();
+    return path;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = theme.textTheme;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final bool useTwoColumns = mediaSize.height < 500;
+    final double spaceFactor = useTwoColumns ? 0.5 : 1;
+
+    if (_debug) debugPrint('Media size $mediaSize');
+
+    return SafeArea(
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints.tightFor(width: 600),
+          child: Padding(
+            padding: EdgeInsets.all(24.0 * spaceFactor),
+            child: Row(
+              children: <Widget>[
+                if (useTwoColumns) ...<Widget>[
+                  const SizedBox(height: 32),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints.tightFor(width: 300),
+                    child: SvgAssetImage(
+                      assetName: AppImages.verified,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ] else
+                  const SizedBox.shrink(),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Spacer(flex: useTwoColumns ? 1 : 2),
+                      Text(
+                        'Sign In',
+                        style: textTheme.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'No account?',
+                            style: textTheme.bodyLarge,
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Make account'),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8 * spaceFactor),
+                      const TextField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.mail),
+                          labelText: 'Email',
+                          hintText: 'Enter your email address',
+                        ),
+                      ),
+                      SizedBox(height: 16 * spaceFactor),
+                      const TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.key),
+                          labelText: 'Password',
+                          hintText: 'Minimum 8 chars',
+                        ),
+                      ),
+                      SizedBox(height: 8 * spaceFactor),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('Forgot Password?'),
+                      ),
+                      SizedBox(height: 16 * spaceFactor),
+                      Center(
+                        child: SizedBox(
+                          width: 200,
+                          child: FilledButton(
+                            onPressed: () {},
+                            child: const Text('Sign In'),
+                          ),
+                        ),
+                      ),
+                      if (!useTwoColumns) ...<Widget>[
+                        const Spacer(),
+                        Expanded(
+                          flex: 10,
+                          child: SvgAssetImage(
+                            assetName: AppImages.verified,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                        const Spacer(),
+                      ] else
+                        const Spacer(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
-  }
-}
-
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
-
-  @override
-  State<LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          EmailField(
-            controller: _emailController,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          PasswordField(
-            controller: _passwordController,
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          FilledButton(
-            onPressed: _signIn,
-            child: const Text('Iniciar Sesion'),
-          ),
-
-          // Create an account
-          FilledButton(
-            onPressed: () {
-              context.push('/register');
-            },
-            child: const Text('Crear una cuenta'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _signIn() async {
-    if (_formKey.currentState?.validate() == true) {
-      try {
-        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-            email: _emailController.text, password: _passwordController.text);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Bienvenido, ${userCredential.user?.email}'),
-        ));
-        Future.delayed(const Duration(seconds: 2), () {
-          context.go('/dashboard');
-        });
-      } on FirebaseAuthException catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Error ${e.message}'),
-        ));
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-}
-
-class EmailField extends StatelessWidget {
-  final TextEditingController controller;
-  const EmailField({super.key, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: const InputDecoration(
-          labelText: 'Correo', prefixIcon: Icon(Icons.email)),
-      keyboardType: TextInputType.emailAddress,
-      validator: Validator.validateEmail,
-    );
-  }
-}
-
-class PasswordField extends StatelessWidget {
-  final TextEditingController controller;
-  const PasswordField({super.key, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: const InputDecoration(
-        labelText: 'Contrasena',
-        prefixIcon: Icon(Icons.lock),
-      ),
-      obscureText: true,
-      keyboardType: TextInputType.emailAddress,
-      validator: Validator.validatePassword,
-    );
-  }
-}
-
-class Validator {
-  static String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor, ingrese el correo';
-    }
-    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-      return 'Por favor, ingres un correo valido';
-    }
-    return null;
-  }
-
-  static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor, ingrese su contrsena';
-    }
-    if (value.length < 6) {
-      return 'la contrasena tiene al menos 6 caracteres';
-    }
-    return null;
   }
 }
