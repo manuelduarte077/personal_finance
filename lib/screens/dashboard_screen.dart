@@ -39,17 +39,17 @@ class DashboardScreen extends StatelessWidget {
           children: [
             // Balance general
             _buildCustomCard(
-              title: "Available balance",
-              amount: "\$3,578",
-              subtitle: "See details",
+              title: 'Available balance',
+              amount: '\$3,578',
+              subtitle: 'See details',
             ),
             const SizedBox(height: 16),
 
             // Presupuesto
             _buildCustomCard(
-              title: "Budget for October",
-              amount: "\$2,478",
-              subtitle: "Cash Available",
+              title: 'Budget for October',
+              amount: '\$2,478',
+              subtitle: 'Cash Available',
             ),
             const SizedBox(height: 16),
 
@@ -66,15 +66,15 @@ class DashboardScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: BudgetCard(
-                    title: "Income",
-                    amount: "\$1,800.00",
+                    title: 'Income',
+                    amount: '\$1,800.00',
                   ),
                 ),
                 SizedBox(width: 16),
                 Expanded(
                   child: BudgetCard(
-                    title: "Expense",
-                    amount: "\$1,800.00",
+                    title: 'Expense',
+                    amount: '\$1,800.00',
                   ),
                 ),
               ],

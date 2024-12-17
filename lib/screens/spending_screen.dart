@@ -22,8 +22,8 @@ class SpendingScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             BudgetCard(
-              title: "Budget for October",
-              amount: "\$2,478",
+              title: 'Budget for October',
+              amount: '\$2,478',
               progress: 0.5,
             ),
             SizedBox(height: 16),

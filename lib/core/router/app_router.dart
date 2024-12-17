@@ -26,7 +26,7 @@ class AppRouter {
       ),
       GoRoute(
         path: '/reset-password',
-        builder: (context, state) => ResetPasswordView(),
+        builder: (context, state) => const ResetPasswordView(),
       ),
       ShellRoute(
         builder: (context, state, child) {
