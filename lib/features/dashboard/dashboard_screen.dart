@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_finance/features/widgets/budget_card.dart';
+import 'package:personal_finance/shared/widgets/budget_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/screens/dashboard_screen.dart';
-import 'package:personal_finance/features/profile/presentation/view/profile_screen.dart';
-import 'package:personal_finance/screens/spending_screen.dart';
-import 'package:personal_finance/screens/wallet_screen.dart';
-import 'package:personal_finance/features/widgets/nav_bar.dart';
+
+import 'features/profile/presentation/view/profile_screen.dart';
+import 'features/spending/spending_screen.dart';
+import 'shared/widgets/nav_bar.dart';
+import 'features/dashboard/dashboard_screen.dart';
+import 'features/wallet/wallet_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

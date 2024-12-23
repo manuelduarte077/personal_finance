@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/features/widgets/line_chart_widget.dart';
-import '../features/widgets/budget_card.dart';
-import '../features/widgets/category_list.dart';
+
+import '../../shared/widgets/budget_card.dart';
+import '../../shared/widgets/category_list.dart';
+import '../../shared/widgets/line_chart_widget.dart';
 
 class SpendingScreen extends StatelessWidget {
   const SpendingScreen({super.key});

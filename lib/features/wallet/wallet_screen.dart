@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../features/widgets/balance_card.dart';
-import '../features/widgets/transaction_list.dart';
+import '../../shared/widgets/balance_card.dart';
+import '../../shared/widgets/transaction_list.dart';
 
 class WalletScreen extends StatelessWidget {
   const WalletScreen({super.key});
