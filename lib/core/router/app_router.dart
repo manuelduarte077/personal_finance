@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/view/login_screen.dart';
 import '../../features/auth/presentation/view/register_screen.dart';
 import '../../features/auth/presentation/view/reset_password_view.dart';
-import '../../features/profile/profile_screen.dart';
+import '../../features/profile/presentation/view/profile_screen.dart';
 import '../../features/widgets/nav_bar.dart';
 import '../../screens/dashboard_screen.dart';
 import '../../screens/spending_screen.dart';
@@ -36,6 +36,7 @@ class AppRouter {
               context.go('/login');
             });
           }
+
           return Scaffold(
             body: child,
             bottomNavigationBar: NavBar(
@@ -44,12 +45,16 @@ class AppRouter {
                 switch (index) {
                   case 0:
                     context.go('/dashboard');
+                    break;
                   case 1:
-                    context.go('/speding');
+                    context.go('/spending');
+                    break;
                   case 2:
                     context.go('/wallet');
+                    break;
                   case 3:
                     context.go('/profile');
+                    break;
                 }
               },
             ),
@@ -61,7 +66,7 @@ class AppRouter {
             builder: (context, state) => const DashboardScreen(),
           ),
           GoRoute(
-            path: '/speding',
+            path: '/spending',
             builder: (context, state) => const SpendingScreen(),
           ),
           GoRoute(
@@ -71,9 +76,9 @@ class AppRouter {
           GoRoute(
             path: '/profile',
             builder: (context, state) => const ProfileScreen(),
-          )
+          ),
         ],
-      )
+      ),
     ],
   );
 
@@ -81,7 +86,7 @@ class AppRouter {
     switch (location) {
       case '/dashboard':
         return 0;
-      case '/speding':
+      case '/spending':
         return 1;
       case '/wallet':
         return 2;

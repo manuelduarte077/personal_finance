@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/screens/dashboard_screen.dart';
-import 'package:personal_finance/features/profile/profile_screen.dart';
+import 'package:personal_finance/features/profile/presentation/view/profile_screen.dart';
 import 'package:personal_finance/screens/spending_screen.dart';
 import 'package:personal_finance/screens/wallet_screen.dart';
 import 'package:personal_finance/features/widgets/nav_bar.dart';
