@@ -2,15 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:personal_finance/screens/dashboard_screen.dart';
-import 'package:personal_finance/features/auth/presentation/view/login_screen.dart';
-import 'package:personal_finance/features/auth/presentation/view/register_screen.dart';
-import 'package:personal_finance/features/profile/profile_screen.dart';
-import 'package:personal_finance/screens/spending_screen.dart';
-import 'package:personal_finance/screens/wallet_screen.dart';
-import 'package:personal_finance/features/widgets/nav_bar.dart';
-
+import '../../features/auth/presentation/view/login_screen.dart';
+import '../../features/auth/presentation/view/register_screen.dart';
 import '../../features/auth/presentation/view/reset_password_view.dart';
+import '../../features/profile/profile_screen.dart';
+import '../../features/widgets/nav_bar.dart';
+import '../../screens/dashboard_screen.dart';
+import '../../screens/spending_screen.dart';
+import '../../screens/wallet_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(

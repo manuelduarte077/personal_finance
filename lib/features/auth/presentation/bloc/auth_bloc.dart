@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:personal_finance/features/auth/domain/use_cases/current_user_use_case.dart';
 
+import '../../domain/use_cases/current_user_use_case.dart';
 import '../../domain/use_cases/reset_password_use_case.dart';
 import '../../domain/use_cases/sign_in_use_case.dart';
 import '../../domain/use_cases/sign_out_use_case.dart';
