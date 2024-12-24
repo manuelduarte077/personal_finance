@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'features/profile/presentation/view/profile_screen.dart';
-import 'features/spending/spending_screen.dart';
+import 'features/spending/view/spending_screen.dart';
 import 'shared/widgets/nav_bar.dart';
 import 'features/dashboard/dashboard_screen.dart';
 import 'features/wallet/wallet_screen.dart';
