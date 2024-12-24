@@ -7,6 +7,7 @@ import '../core/router/app_router.dart';
 import '../core/theme/app_theme.dart';
 import '../features/auth/presentation/bloc/auth_bloc.dart';
 import '../features/profile/presentation/bloc/profile_bloc.dart';
+import '../features/spending/bloc/transaction_bloc.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -24,6 +25,9 @@ class MainApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<ProfileBloc>(),
         ),
+        BlocProvider(
+          create: (context) => TransactionBloc()..add(LoadTransactions()),
+        )
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
