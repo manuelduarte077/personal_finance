@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:personal_finance/core/router/app_router.dart';
-import 'package:personal_finance/core/theme/app_theme.dart';
-import 'package:personal_finance/features/auth/presentation/bloc/auth_bloc.dart';
-
 import '../core/di/dependency_injection.dart';
+import '../core/router/app_router.dart';
+import '../core/theme/app_theme.dart';
+import '../features/auth/presentation/bloc/auth_bloc.dart';
+import '../features/profile/presentation/bloc/profile_bloc.dart';
+import '../features/spending/bloc/transaction_bloc.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -21,6 +22,12 @@ class MainApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<AuthBloc>(),
         ),
+        BlocProvider(
+          create: (context) => getIt<ProfileBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => TransactionBloc()..add(LoadTransactions()),
+        )
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

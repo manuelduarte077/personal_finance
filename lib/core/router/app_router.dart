@@ -2,15 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:personal_finance/screens/dashboard_screen.dart';
-import 'package:personal_finance/features/auth/presentation/view/login_screen.dart';
-import 'package:personal_finance/features/auth/presentation/view/register_screen.dart';
-import 'package:personal_finance/features/profile/profile_screen.dart';
-import 'package:personal_finance/screens/spending_screen.dart';
-import 'package:personal_finance/screens/wallet_screen.dart';
-import 'package:personal_finance/features/widgets/nav_bar.dart';
-
+import '../../features/auth/presentation/view/login_screen.dart';
+import '../../features/auth/presentation/view/register_screen.dart';
 import '../../features/auth/presentation/view/reset_password_view.dart';
+import '../../features/profile/presentation/view/profile_screen.dart';
+import '../../shared/widgets/nav_bar.dart';
+import '../../features/dashboard/dashboard_screen.dart';
+import '../../features/spending/view/spending_screen.dart';
+import '../../features/wallet/wallet_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -26,7 +25,7 @@ class AppRouter {
       ),
       GoRoute(
         path: '/reset-password',
-        builder: (context, state) => ResetPasswordView(),
+        builder: (context, state) => const ResetPasswordView(),
       ),
       ShellRoute(
         builder: (context, state, child) {
@@ -37,6 +36,7 @@ class AppRouter {
               context.go('/login');
             });
           }
+
           return Scaffold(
             body: child,
             bottomNavigationBar: NavBar(
@@ -45,12 +45,16 @@ class AppRouter {
                 switch (index) {
                   case 0:
                     context.go('/dashboard');
+                    break;
                   case 1:
-                    context.go('/speding');
+                    context.go('/spending');
+                    break;
                   case 2:
                     context.go('/wallet');
+                    break;
                   case 3:
                     context.go('/profile');
+                    break;
                 }
               },
             ),
@@ -62,7 +66,7 @@ class AppRouter {
             builder: (context, state) => const DashboardScreen(),
           ),
           GoRoute(
-            path: '/speding',
+            path: '/spending',
             builder: (context, state) => const SpendingScreen(),
           ),
           GoRoute(
@@ -72,9 +76,9 @@ class AppRouter {
           GoRoute(
             path: '/profile',
             builder: (context, state) => const ProfileScreen(),
-          )
+          ),
         ],
-      )
+      ),
     ],
   );
 
@@ -82,7 +86,7 @@ class AppRouter {
     switch (location) {
       case '/dashboard':
         return 0;
-      case '/speding':
+      case '/spending':
         return 1;
       case '/wallet':
         return 2;

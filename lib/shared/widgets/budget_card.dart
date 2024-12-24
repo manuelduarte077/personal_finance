@@ -38,7 +38,7 @@ class BudgetCard extends StatelessWidget {
           if (subtitle != null) ...[
             const SizedBox(height: 8),
             Text(
-              subtitle!,
+              subtitle ?? '',
               style: theme.textTheme.bodyMedium,
             ),
           ],

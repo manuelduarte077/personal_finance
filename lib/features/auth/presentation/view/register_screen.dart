@@ -152,12 +152,12 @@ class _RegisterFormState extends State<RegisterForm> {
                     const SizedBox(height: 32),
                     Text(
                       'Create an Account',
-                      style: textTheme.headlineLarge!
-                          .copyWith(fontWeight: FontWeight.bold),
+                      style: textTheme.headlineLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
+                      children: [
                         Text(
                           'You have an account?',
                           style: textTheme.bodyLarge,
@@ -191,12 +191,14 @@ class _RegisterFormState extends State<RegisterForm> {
                         width: 200,
                         child: FilledButton(
                           onPressed: () {
-                            context.read<AuthBloc>().add(SignUpRequested(
-                                  nameController.text,
-                                  emailController.text,
-                                  passwordController.text,
-                                  profilePicture?.path ?? '',
-                                ));
+                            context.read<AuthBloc>().add(
+                                  SignUpRequested(
+                                    nameController.text,
+                                    emailController.text,
+                                    passwordController.text,
+                                    profilePicture?.path ?? '',
+                                  ),
+                                );
                           },
                           child: const Text(
                             'Sign Up',
