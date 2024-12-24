@@ -6,6 +6,7 @@ import '../core/di/dependency_injection.dart';
 import '../core/router/app_router.dart';
 import '../core/theme/app_theme.dart';
 import '../features/auth/presentation/bloc/auth_bloc.dart';
+import '../features/profile/presentation/bloc/profile_bloc.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -19,6 +20,9 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => getIt<AuthBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ProfileBloc>(),
         ),
       ],
       child: ScreenUtilInit(
