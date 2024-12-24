@@ -248,7 +248,7 @@ class ProfileScreen extends StatelessWidget {
                                     context
                                         .read<AuthBloc>()
                                         .add(SignOutRequested());
-                                    context.goNamed('login');
+                                    context.pushReplacement('/login');
                                   }
                                 },
                               )
