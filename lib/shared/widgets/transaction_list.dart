@@ -1,60 +1,33 @@
 import 'package:flutter/material.dart';
+import '../../features/spending/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList({super.key});
+  final List<Transaction> transactions;
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 5, // Número de transacciones simuladas
-      itemBuilder: (context, index) {
-        return TransactionItem(
-          title: 'Transaction #$index',
-          date: '10 Jan 2022',
-          amount: '\$120.00',
-          icon: Icons.shopping_bag,
-        );
-      },
-    );
-  }
-}
-
-class TransactionItem extends StatelessWidget {
-  final String title;
-  final String date;
-  final String amount;
-  final IconData icon;
-
-  const TransactionItem({
+  const TransactionList({
     super.key,
-    required this.title,
-    required this.date,
-    required this.amount,
-    required this.icon,
+    required this.transactions,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Theme.of(context).primaryColorLight,
-          child: Icon(icon, color: Theme.of(context).primaryColor),
-        ),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        subtitle: Text(
-          date,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        trailing: Text(
-          amount,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-      ),
+    return ListView.builder(
+      itemCount: transactions.length,
+      itemBuilder: (context, index) {
+        final transaction = transactions[index];
+        return ListTile(
+          title: Text(transaction.title),
+          subtitle: Text(transaction.date.toString()),
+          trailing: Text(
+            '${transaction.type == TransactionType.expense ? "-" : "+"}\$${transaction.amount}',
+            style: TextStyle(
+              color: transaction.type == TransactionType.expense
+                  ? Colors.red
+                  : Colors.green,
+            ),
+          ),
+        );
+      },
     );
   }
 }
